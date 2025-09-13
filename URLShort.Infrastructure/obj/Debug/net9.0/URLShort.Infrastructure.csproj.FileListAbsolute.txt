@@ -1,0 +1,17 @@
+/home/sola_g/Downloads/SWE/URLShort/URLShort.Infrastructure/bin/Debug/net9.0/URLShort.Infrastructure.deps.json
+/home/sola_g/Downloads/SWE/URLShort/URLShort.Infrastructure/bin/Debug/net9.0/URLShort.Infrastructure.dll
+/home/sola_g/Downloads/SWE/URLShort/URLShort.Infrastructure/bin/Debug/net9.0/URLShort.Infrastructure.pdb
+/home/sola_g/Downloads/SWE/URLShort/URLShort.Infrastructure/bin/Debug/net9.0/URLShort.Core.dll
+/home/sola_g/Downloads/SWE/URLShort/URLShort.Infrastructure/bin/Debug/net9.0/URLShort.Core.pdb
+/home/sola_g/Downloads/SWE/URLShort/URLShort.Infrastructure/obj/Debug/net9.0/URLShort.Infrastructure.csproj.AssemblyReference.cache
+/home/sola_g/Downloads/SWE/URLShort/URLShort.Infrastructure/obj/Debug/net9.0/URLShort.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/home/sola_g/Downloads/SWE/URLShort/URLShort.Infrastructure/obj/Debug/net9.0/URLShort.Infrastructure.AssemblyInfoInputs.cache
+/home/sola_g/Downloads/SWE/URLShort/URLShort.Infrastructure/obj/Debug/net9.0/URLShort.Infrastructure.AssemblyInfo.cs
+/home/sola_g/Downloads/SWE/URLShort/URLShort.Infrastructure/obj/Debug/net9.0/URLShort.Infrastructure.csproj.CoreCompileInputs.cache
+/home/sola_g/Downloads/SWE/URLShort/URLShort.Infrastructure/obj/Debug/net9.0/URLShort.F6574895.Up2Date
+/home/sola_g/Downloads/SWE/URLShort/URLShort.Infrastructure/obj/Debug/net9.0/URLShort.Infrastructure.dll
+/home/sola_g/Downloads/SWE/URLShort/URLShort.Infrastructure/obj/Debug/net9.0/refint/URLShort.Infrastructure.dll
+/home/sola_g/Downloads/SWE/URLShort/URLShort.Infrastructure/obj/Debug/net9.0/URLShort.Infrastructure.pdb
+/home/sola_g/Downloads/SWE/URLShort/URLShort.Infrastructure/obj/Debug/net9.0/ref/URLShort.Infrastructure.dll
+/home/sola_g/Downloads/SWE/URLShort/URLShort.Infrastructure/bin/Debug/net9.0/URLShort.Infrastructure.runtimeconfig.json
+/home/sola_g/Downloads/SWE/URLShort/URLShort.Infrastructure/obj/Debug/net9.0/URLShort.Infrastructure.genruntimeconfig.cache

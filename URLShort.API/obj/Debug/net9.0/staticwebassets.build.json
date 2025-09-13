@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "LenlW3HY5D60GBchGnyxPPus/tcIkBdMlU/HE06ThgM=",
+  "Source": "URLShort.API",
+  "BasePath": "_content/URLShort.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

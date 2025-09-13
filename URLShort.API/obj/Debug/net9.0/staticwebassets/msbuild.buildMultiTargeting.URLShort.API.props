@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/URLShort.API.props" />
+</Project>
