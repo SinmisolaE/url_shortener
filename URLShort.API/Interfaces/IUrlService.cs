@@ -9,7 +9,7 @@ namespace URLShort.API.Interfaces
     {
         Task<ShortenUrl> GetUrlByIdAsync(int id);
         Task<string> GetUrlByShortUrlAsync(string shortCodes);
-        //Task<ShortenUrl> GetUrlByLongUrlAsync(string longUrl);
+//        Task<ShortenUrl> GetUrlByLongUrlAsync(string longUrl);
         Task<string> AddUrlAsync(UrlDTO urlDTO);
 
     }

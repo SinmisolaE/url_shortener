@@ -53,6 +53,12 @@ namespace URLShort.API.Service {
 
             var url = new ShortenUrl(urlDTO.LongURL);
 
+            var confirm_url = await _repository.GetUrlByLongUrlAsync(url.LongURL);
+
+            if (confirm_url != null)
+            {
+                return $"{_appSettings.BaseUrl}/{confirm_url.ShortURL}";
+            }
 
             var add_url = await _repository.AddUrlAsync(url);
 

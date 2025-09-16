@@ -38,10 +38,12 @@ namespace URLShort.Infrastructure.Migrations
 
                     b.Property<string>("LongURL")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasMaxLength(2000)
+                        .HasColumnType("VARCHAR(500)");
 
                     b.Property<string>("ShortURL")
                         .IsRequired()
+                        .HasMaxLength(100)
                         .HasColumnType("VARCHAR(100)");
 
                     b.HasKey("Id");

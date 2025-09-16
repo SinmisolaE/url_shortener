@@ -14,11 +14,13 @@ namespace URLShort.Core
         public int Id { get; set; }
 
         [Required]
-        [Column(TypeName = "TEXT(200)")]
+        [Column(TypeName = "VARCHAR(500)")]
+        [MaxLength(2000)]
         public string LongURL { get; set; } = string.Empty;
 
         [Required]
         [Column(TypeName = "VARCHAR(100)")]
+        [MaxLength(100)]
         public string ShortURL { get; set; } = string.Empty;
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;

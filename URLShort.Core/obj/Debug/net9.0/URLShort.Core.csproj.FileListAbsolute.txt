@@ -10,3 +10,4 @@
 /home/sola_g/Downloads/SWE/URLShort/URLShort.Core/obj/Debug/net9.0/refint/URLShort.Core.dll
 /home/sola_g/Downloads/SWE/URLShort/URLShort.Core/obj/Debug/net9.0/URLShort.Core.pdb
 /home/sola_g/Downloads/SWE/URLShort/URLShort.Core/obj/Debug/net9.0/ref/URLShort.Core.dll
+/home/sola_g/Downloads/SWE/URLShort/URLShort.Core/obj/Debug/net9.0/URLShort.Core.sourcelink.json

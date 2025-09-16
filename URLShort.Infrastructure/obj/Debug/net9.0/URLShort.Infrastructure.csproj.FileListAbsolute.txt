@@ -15,3 +15,4 @@
 /home/sola_g/Downloads/SWE/URLShort/URLShort.Infrastructure/obj/Debug/net9.0/ref/URLShort.Infrastructure.dll
 /home/sola_g/Downloads/SWE/URLShort/URLShort.Infrastructure/bin/Debug/net9.0/URLShort.Infrastructure.runtimeconfig.json
 /home/sola_g/Downloads/SWE/URLShort/URLShort.Infrastructure/obj/Debug/net9.0/URLShort.Infrastructure.genruntimeconfig.cache
+/home/sola_g/Downloads/SWE/URLShort/URLShort.Infrastructure/obj/Debug/net9.0/URLShort.Infrastructure.sourcelink.json

@@ -12,8 +12,8 @@ using URLShort.Infrastructure.Data;
 namespace URLShort.Infrastructure.Migrations
 {
     [DbContext(typeof(ShortenUrlDbContext))]
-    [Migration("20250909234156_FixOnDb")]
-    partial class FixOnDb
+    [Migration("20250914203126_Prevent duplicates on table")]
+    partial class Preventduplicatesontable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,10 +41,12 @@ namespace URLShort.Infrastructure.Migrations
 
                     b.Property<string>("LongURL")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasMaxLength(2000)
+                        .HasColumnType("VARCHAR(500)");
 
                     b.Property<string>("ShortURL")
                         .IsRequired()
+                        .HasMaxLength(100)
                         .HasColumnType("VARCHAR(100)");
 
                     b.HasKey("Id");

@@ -5,21 +5,24 @@ using URLShort.API.Interfaces;
 
 namespace URLShort.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class UrlController : ControllerBase
     {
 
         private readonly IUrlService _service;
+        private readonly ILogger<UrlController> _logger;
 
-        public UrlController(IUrlService service)
+        public UrlController(IUrlService service, ILogger<UrlController> logger)
         {
             _service = service;
+            _logger = logger;
         }
 
         [HttpGet]
         public ActionResult<string> Welcome()
         {
+            _logger.LogInformation("In application");
             return Ok("Welcome to URL shortener");
         }
 
@@ -29,12 +32,14 @@ namespace URLShort.API.Controllers
         {
             try
             {
+                _logger.LogInformation("Trying to generate short url");
                 var url = await _service.AddUrlAsync(urlDTO);
 
                 return Ok(url);
             }
             catch (Exception e)
             {
+                _logger.LogError(e.Message);
                 return BadRequest(e.Message);
             }
         }
@@ -45,12 +50,15 @@ namespace URLShort.API.Controllers
         {
             try
             {
+                _logger.LogInformation("Trying to get long url");
                 var url = await _service.GetUrlByShortUrlAsync(shortCode);
 
+                _logger.LogInformation("Redirectiong to {url}", url);
                 return Redirect(url);
             }
             catch (Exception e)
             {
+                _logger.LogInformation(e.Message);
                 return BadRequest(e.Message);
             }
         }

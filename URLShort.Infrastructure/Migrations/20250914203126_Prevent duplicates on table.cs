@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace URLShort.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class FixOnDb : Migration
+    public partial class Preventduplicatesontable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,9 +21,9 @@ namespace URLShort.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    LongURL = table.Column<string>(type: "TEXT", nullable: false)
+                    LongURL = table.Column<string>(type: "VARCHAR(500)", maxLength: 2000, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ShortURL = table.Column<string>(type: "VARCHAR(100)", nullable: false)
+                    ShortURL = table.Column<string>(type: "VARCHAR(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Count = table.Column<int>(type: "int", nullable: false)
