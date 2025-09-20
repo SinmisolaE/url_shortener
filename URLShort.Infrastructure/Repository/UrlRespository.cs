@@ -43,22 +43,30 @@ public class UrlRespository : IUrlRepository
 
             await _context.SaveChangesAsync();
         }
-        catch (Exception e)
+        catch (DbUpdateException e)
         {
             System.Console.WriteLine("oooppsss");
-            if (e.InnerException != null)
-            {
 
-                _logger.LogError($"its simiii:  {e.InnerException.Message}");
-                Console.WriteLine("errororr\n\n err: " + e.InnerException.Message);
-            }
+            _logger.LogError($"Error:  {e.Message}");
+
+            throw;
+
         }
         return longUrl;
     }
 
     public async Task SaveChangesAsync()
     {
-        await _context.SaveChangesAsync();
+        try
+        {
+
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateException e)
+        {
+            _logger.LogError($"Error: {e.Message}");
+            throw;
+        }
         
     }
 }

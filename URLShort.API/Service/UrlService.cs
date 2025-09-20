@@ -11,6 +11,7 @@ namespace URLShort.API.Service {
         private readonly IUrlRepository _repository;
 
         private readonly IEncode _encode;
+        private const int MaxLimit = 2000;
 
 
         //inject appsettings url {localhost:7070} to my service
@@ -50,6 +51,17 @@ namespace URLShort.API.Service {
         public async Task<string> AddUrlAsync(UrlDTO urlDTO)
         {
             System.Console.WriteLine($"yeee:  {_appSettings.BaseUrl}");
+
+            // Handle likely errors
+            if (string.IsNullOrEmpty(urlDTO.LongURL))
+            {
+                throw new ArgumentException("Url caannot be empty");
+            }
+
+            if (urlDTO.LongURL.Length > MaxLimit)
+            {
+                throw new Exception("Url too long");
+            }
 
             var url = new ShortenUrl(urlDTO.LongURL);
 

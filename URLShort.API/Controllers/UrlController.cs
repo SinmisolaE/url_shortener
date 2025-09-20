@@ -27,7 +27,7 @@ namespace URLShort.API.Controllers
         }
 
 
-        [HttpPost("/generate")]
+        [HttpPost("generate")]
         public async Task<ActionResult<string>> GenerateShortUrl(UrlDTO urlDTO)
         {
             try

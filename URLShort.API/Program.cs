@@ -5,6 +5,8 @@ using URLShort.Infrastructure.Data;
 using URLShort.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using URLShort.Infrastructure.Middleware;
+using AspNetCoreRateLimit;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -59,7 +61,19 @@ builder.Services.AddHealthChecks()
     .AddDbContextCheck<ShortenUrlDbContext>(
         name: "url-shortenr-db",
         tags: new[] { "ready" }
-    );
+);
+
+builder.Services.AddMemoryCache();
+builder.Services.AddInMemoryRateLimiting();
+
+
+// the two below for setting an example
+
+builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
+builder.Services.Configure<IpRateLimitPolicies>(builder.Configuration.GetSection("IpRateLimitPolicies"));
+
+builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+
 
 var app = builder.Build();
 
@@ -70,7 +84,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<ExceptionMiddleware>();   //Add middleware
+
 app.UseHttpsRedirection();
+
+app.UseIpRateLimiting();  // middleware to handle rate limiting
 
 app.UseAuthorization();
 

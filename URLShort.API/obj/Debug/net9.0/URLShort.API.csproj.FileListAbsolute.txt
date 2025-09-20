@@ -156,3 +156,5 @@
 /home/sola_g/Downloads/SWE/URLShort/URLShort.API/bin/Debug/net9.0/Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.dll
 /home/sola_g/Downloads/SWE/URLShort/URLShort.API/bin/Debug/net9.0/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore.dll
 /home/sola_g/Downloads/SWE/URLShort/URLShort.API/bin/Debug/net9.0/Microsoft.Extensions.Hosting.Abstractions.dll
+/home/sola_g/Downloads/SWE/URLShort/URLShort.API/bin/Debug/net9.0/AspNetCoreRateLimit.dll
+/home/sola_g/Downloads/SWE/URLShort/URLShort.API/bin/Debug/net9.0/Newtonsoft.Json.dll
