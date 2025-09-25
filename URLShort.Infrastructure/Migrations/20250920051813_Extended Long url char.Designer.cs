@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using URLShort.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using URLShort.Infrastructure.Data;
 namespace URLShort.Infrastructure.Migrations
 {
     [DbContext(typeof(ShortenUrlDbContext))]
-    partial class ShortenUrlDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250920051813_Extended Long url char")]
+    partial class ExtendedLongurlchar
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

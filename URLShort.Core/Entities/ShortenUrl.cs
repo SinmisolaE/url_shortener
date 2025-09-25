@@ -14,8 +14,8 @@ namespace URLShort.Core
         public int Id { get; set; }
 
         [Required]
-        [Column(TypeName = "VARCHAR(2000)")]
-        [MaxLength(2000)]
+        [Column(TypeName = "VARCHAR(768)")]
+        [MaxLength(768)]
         public string LongURL { get; set; } = string.Empty;
 
         [Required]

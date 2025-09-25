@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using URLShort.API.DTO;
 using URLShort.API.Interfaces;
+using URLShort.Core.Exceptions;
 
 namespace URLShort.API.Controllers
 {
@@ -36,6 +37,11 @@ namespace URLShort.API.Controllers
                 var url = await _service.AddUrlAsync(urlDTO);
 
                 return Ok(url);
+            }
+            catch (UrlTooLongException e)
+            {
+                _logger.LogError($"Error: {e.Message}");
+                return BadRequest(e.Message);
             }
             catch (Exception e)
             {

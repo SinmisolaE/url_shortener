@@ -158,3 +158,6 @@
 /home/sola_g/Downloads/SWE/URLShort/URLShort.API/bin/Debug/net9.0/Microsoft.Extensions.Hosting.Abstractions.dll
 /home/sola_g/Downloads/SWE/URLShort/URLShort.API/bin/Debug/net9.0/AspNetCoreRateLimit.dll
 /home/sola_g/Downloads/SWE/URLShort/URLShort.API/bin/Debug/net9.0/Newtonsoft.Json.dll
+/home/sola_g/Downloads/SWE/URLShort/URLShort.API/bin/Debug/net9.0/Microsoft.Extensions.Caching.StackExchangeRedis.dll
+/home/sola_g/Downloads/SWE/URLShort/URLShort.API/bin/Debug/net9.0/Pipelines.Sockets.Unofficial.dll
+/home/sola_g/Downloads/SWE/URLShort/URLShort.API/bin/Debug/net9.0/StackExchange.Redis.dll

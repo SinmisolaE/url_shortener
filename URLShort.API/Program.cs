@@ -67,6 +67,14 @@ builder.Services.AddMemoryCache();
 builder.Services.AddInMemoryRateLimiting();
 
 
+//Enable caching using redis
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    string connection = builder.Configuration.GetConnectionString("Redis");
+
+    options.Configuration = connection;
+});
+
 // the two below for setting an example
 
 builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
