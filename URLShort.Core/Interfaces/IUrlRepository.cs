@@ -11,6 +11,7 @@ namespace URLShort.Core
         Task<ShortenUrl?> GetUrlByShortUrlAsync(string shortenUrl);
 
         Task<ShortenUrl?> GetUrlByLongUrlAsync(string longUrl);
+
         Task SaveChangesAsync();
 
     }

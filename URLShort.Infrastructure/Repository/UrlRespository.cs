@@ -27,7 +27,7 @@ public class UrlRespository : IUrlRepository
     {
         return await _context.ShortenUrls.FirstOrDefaultAsync(x => x.ShortURL == shortenUrl);
     }
-    
+
     public async Task<ShortenUrl?> GetUrlByLongUrlAsync(string longUrl)
     {
         return await _context.ShortenUrls.FirstOrDefaultAsync(x => x.LongURL == longUrl);
@@ -55,6 +55,8 @@ public class UrlRespository : IUrlRepository
         return longUrl;
     }
 
+
+
     public async Task SaveChangesAsync()
     {
         try
@@ -67,6 +69,7 @@ public class UrlRespository : IUrlRepository
             _logger.LogError($"Error: {e.Message}");
             throw;
         }
-        
+
     }
+
 }

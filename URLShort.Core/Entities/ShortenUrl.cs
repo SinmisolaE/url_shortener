@@ -32,5 +32,6 @@ namespace URLShort.Core
         {    
             this.LongURL = LongURL;
         }
+
     }
 }

@@ -47,6 +47,8 @@ namespace URLShort.API.Service {
             //check cache
             string longUrl = await _distributedCache.GetStringAsync(cache_key);
 
+
+
             _logger.LogInformation("Checking cache");
 
             if (string.IsNullOrEmpty(longUrl))
@@ -61,10 +63,25 @@ namespace URLShort.API.Service {
                 }
 
                 _logger.LogInformation("Storing data to cache");
-                await _distributedCache.SetStringAsync(cache_key, url.LongURL);
+                await _distributedCache.SetStringAsync(cache_key, url.LongURL, new DistributedCacheEntryOptions
+                {
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(24)
+                });
+
+                url.Count++;
+                await _repository.SaveChangesAsync();
 
                 return $"{url.LongURL}";
             }
+
+            var get_url = await _repository.GetUrlByLongUrlAsync(longUrl);
+
+            if (get_url == null) throw new Exception("Url not found");
+            get_url.Count++;
+            await _repository.SaveChangesAsync();
+
+            _logger.LogInformation("Returning data from cache");
+
 
             return longUrl;  
         }

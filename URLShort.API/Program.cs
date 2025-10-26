@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 using URLShort.Infrastructure.Middleware;
 using AspNetCoreRateLimit;
+using Hangfire;
+using Hangfire.MySql;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -47,6 +49,15 @@ builder.Services.AddDbContext<ShortenUrlDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString),
     b => b.MigrationsAssembly("URLShort.Infrastructure")) // Tell ef wehere migrations are
 );
+
+//Add Hangfire-- handles background job
+builder.Services.AddHangfire(config => config
+    .UseStorage(new MySqlStorage(
+        connectionString,
+        new MySqlStorageOptions()
+    ))
+);
+builder.Services.AddHangfireServer();
 
 //register url  configuration
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
@@ -90,6 +101,9 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    //use hangfire dashboard
+    app.UseHangfireDashboard();
 }
 
 app.UseMiddleware<ExceptionMiddleware>();   //Add middleware
