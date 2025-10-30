@@ -1,7 +1,7 @@
+using Hangfire;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using URLShort.API.DTO;
-using URLShort.API.Interfaces;
 using URLShort.Core.Exceptions;
 
 namespace URLShort.API.Controllers
@@ -58,6 +58,8 @@ namespace URLShort.API.Controllers
             {
                 _logger.LogInformation("Trying to get long url");
                 var url = await _service.GetUrlByShortUrlAsync(shortCode);
+
+                BackgroundJob.Enqueue<IClickService>(x => x.RecordClick(shortCode));
 
                 _logger.LogInformation("Redirectiong to {url}", url);
                 return Redirect(url);

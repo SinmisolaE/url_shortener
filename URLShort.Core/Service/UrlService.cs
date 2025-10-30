@@ -1,12 +1,12 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using MySqlConnector;
-using URLShort.API.DTO;
 using URLShort.API.Interfaces;
 using URLShort.Core;
 using URLShort.Core.Exceptions;
+using URLShort.Core.Interfaces.ServiceInterfaces;
 
 namespace URLShort.API.Service {
 
@@ -86,30 +86,30 @@ namespace URLShort.API.Service {
             return longUrl;  
         }
 
-        public async Task<string> AddUrlAsync(UrlDTO urlDTO)
+        public async Task<string> AddUrlAsync(string longUrl)
         {
             System.Console.WriteLine($"yeee:  {_appSettings.BaseUrl}");
 
             // Validate input
-            if (string.IsNullOrEmpty(urlDTO.LongURL))
+            if (string.IsNullOrEmpty(longUrl))
             {
                 throw new ArgumentException("Url caannot be empty");
             }
 
-            if (urlDTO.LongURL.Length > MaxLimit)
+            if (longUrl.Length > MaxLimit)
             {
-                throw new UrlTooLongException(MaxLimit, urlDTO.LongURL.Length);
+                throw new UrlTooLongException(MaxLimit, longUrl.Length);
             }
 
             // Check if url already exists
-            var confirm_url = await _repository.GetUrlByLongUrlAsync(urlDTO.LongURL);
+            var confirm_url = await _repository.GetUrlByLongUrlAsync(longUrl);
 
             if (confirm_url != null)
             {
                 return $"{_appSettings.BaseUrl}/{confirm_url.ShortURL}";
             }
 
-            var url = new ShortenUrl(urlDTO.LongURL);
+            var url = new ShortenUrl(longUrl);
 
             try
             {
@@ -123,9 +123,9 @@ namespace URLShort.API.Service {
 
                 return $"{_appSettings.BaseUrl}/{add_url.ShortURL}";
             }
-            catch (DbUpdateException e) when (IsUniqueConstraintViolation(e))
+            catch (DuplicateUrlException e) 
             {
-                var raceConditionUrl = await _repository.GetUrlByLongUrlAsync(urlDTO.LongURL);
+                var raceConditionUrl = await _repository.GetUrlByLongUrlAsync(longUrl);
 
                 if (raceConditionUrl != null)
                 {
@@ -133,18 +133,12 @@ namespace URLShort.API.Service {
                 }
 
                 _logger.LogError("Failed to create short url");
-                throw new Exception("Error: Failed to create short url");
+                throw new DuplicateUrlException("URL already exists", e);
             }
 
         }
 
-        // validate the exception
-        private bool IsUniqueConstraintViolation(DbUpdateException ex)
-        {
-            return ex.InnerException is MySqlException mySql &&
-                mySql.ErrorCode == MySqlErrorCode.DuplicateKeyEntry;
-        }
-
+        
     }
 
     
