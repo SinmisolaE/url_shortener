@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+
+  urlshort.api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    ports:
+      - "8080:8080"
+
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings_DefaultConnection=Server=urlshort.db;Database=urlshortenerdb;User=root;Password=forgotfirst;
+      - ConnectionStrings_Redis=urlshort.redis:6379
+    
+    depends_on:
+      - urlshort.db
+      - urlshort.redis
+
+    restart: unless-stopped
+
+  #MySQL
+
+  urlshort.db:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=forgotfirst
+      - MYSQL_DATABASE=urlshortenerdb
+
+    ports:
+      - 3307:3306
+
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+    restart: unless-stopped
+
+
+
+  #Redis
+  urlshort.redis:
+      image: redis:7-alpine
+      ports:
+        - "6379:6379"
+
+      restart: unless-stopped
+
+volumes:
+    mysql_data:
+

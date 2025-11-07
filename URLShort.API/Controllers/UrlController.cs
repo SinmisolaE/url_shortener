@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using URLShort.API.DTO;
 using URLShort.Core.Exceptions;
+using URLShort.Core.Interfaces.ServiceInterfaces;
 
 namespace URLShort.API.Controllers
 {
@@ -34,7 +35,7 @@ namespace URLShort.API.Controllers
             try
             {
                 _logger.LogInformation("Trying to generate short url");
-                var url = await _service.AddUrlAsync(urlDTO);
+                var url = await _service.AddUrlAsync(urlDTO.LongURL);
 
                 return Ok(url);
             }

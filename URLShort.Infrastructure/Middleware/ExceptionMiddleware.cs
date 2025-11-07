@@ -28,6 +28,7 @@ public class ExceptionMiddleware
         }
         catch (Exception ex)
         {
+            System.Console.WriteLine($"error: {ex.Message}");
             _logger.LogError(ex, "An internal error has occured");
             await HandleExceptionAsync(context, ex);
         }

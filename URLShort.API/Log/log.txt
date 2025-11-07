@@ -1,5 +1,0 @@
-2025-09-21 23:26:58.534 +00:00 [INF] Now listening on: http://localhost:5018
-2025-09-21 23:26:58.655 +00:00 [INF] Application started. Press Ctrl+C to shut down.
-2025-09-21 23:26:58.658 +00:00 [INF] Hosting environment: Development
-2025-09-21 23:26:58.659 +00:00 [INF] Content root path: /home/sola_g/Downloads/SWE/URLShort/URLShort.API
-2025-09-21 23:39:27.565 +00:00 [INF] Application is shutting down...

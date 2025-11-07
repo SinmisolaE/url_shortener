@@ -12,7 +12,7 @@ namespace URLShort.API.Controllers
         [HttpGet("/throw")]
         public IActionResult throwCode()
         {
-            throw new Exception("Testing my middleware");
+            return Ok("Testing my middleware");
         }
     }
 }

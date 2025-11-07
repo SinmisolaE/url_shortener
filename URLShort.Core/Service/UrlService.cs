@@ -43,13 +43,21 @@ namespace URLShort.API.Service {
         public async Task<string> GetUrlByShortUrlAsync(string shortCode)
         {
             string cache_key = $"shortCode_{shortCode}";
+            string longUrl = null;
 
-            //check cache
-            string longUrl = await _distributedCache.GetStringAsync(cache_key);
+            try
+            {
+                //check cache
+                _logger.LogInformation("Checking cache");
+
+                longUrl = await _distributedCache.GetStringAsync(cache_key);
+            } catch (Exception ex)
+            {
+                _logger.LogWarning("Cant access cache! Proceeding...");
+            }
 
 
 
-            _logger.LogInformation("Checking cache");
 
             if (string.IsNullOrEmpty(longUrl))
             {
@@ -62,11 +70,19 @@ namespace URLShort.API.Service {
                     throw new Exception("Url not found");
                 }
 
-                _logger.LogInformation("Storing data to cache");
-                await _distributedCache.SetStringAsync(cache_key, url.LongURL, new DistributedCacheEntryOptions
+                try
                 {
-                    AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(24)
-                });
+                    
+
+                    _logger.LogInformation("Storing data to cache");
+                    await _distributedCache.SetStringAsync(cache_key, url.LongURL, new DistributedCacheEntryOptions
+                    {
+                        AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(24)
+                    });
+                } catch (Exception ex)
+                {
+                    _logger.LogWarning("Cant store to cache");
+                }
 
                 url.Count++;
                 await _repository.SaveChangesAsync();
@@ -88,31 +104,39 @@ namespace URLShort.API.Service {
 
         public async Task<string> AddUrlAsync(string longUrl)
         {
+            _logger.LogInformation("In Add new url function");
             System.Console.WriteLine($"yeee:  {_appSettings.BaseUrl}");
 
             // Validate input
             if (string.IsNullOrEmpty(longUrl))
             {
+                _logger.LogError("URL is empty");
                 throw new ArgumentException("Url caannot be empty");
             }
 
             if (longUrl.Length > MaxLimit)
             {
+                _logger.LogError("URL too long");
                 throw new UrlTooLongException(MaxLimit, longUrl.Length);
             }
 
             // Check if url already exists
+            _logger.LogInformation("Check if url already exists");
             var confirm_url = await _repository.GetUrlByLongUrlAsync(longUrl);
 
             if (confirm_url != null)
             {
+                _logger.LogInformation("Url exists");
                 return $"{_appSettings.BaseUrl}/{confirm_url.ShortURL}";
             }
+
+            _logger.LogInformation("Does not exists creating....");
 
             var url = new ShortenUrl(longUrl);
 
             try
             {
+                _logger.LogInformation("Adding to db");
                 var add_url = await _repository.AddUrlAsync(url);
 
                 var shortCode = _encode.EncodeValue(add_url.Id);

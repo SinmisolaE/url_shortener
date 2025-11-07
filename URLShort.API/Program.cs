@@ -9,6 +9,7 @@ using URLShort.Infrastructure.Middleware;
 using AspNetCoreRateLimit;
 using Hangfire;
 using Hangfire.MySql;
+using URLShort.Core.Interfaces.ServiceInterfaces;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -46,11 +47,13 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 
 builder.Services.AddDbContext<ShortenUrlDbContext>(options =>
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString),
+    options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 44)),  //ServerVersion.AutoDetect was causing startup fail of docker
+    // as it tried to connect to mysql at project startup
     b => b.MigrationsAssembly("URLShort.Infrastructure")) // Tell ef wehere migrations are
 );
 
 //Add Hangfire-- handles background job
+/*
 builder.Services.AddHangfire(config => config
     .UseStorage(new MySqlStorage(
         connectionString,
@@ -58,6 +61,9 @@ builder.Services.AddHangfire(config => config
     ))
 );
 builder.Services.AddHangfireServer();
+
+*/
+
 
 //register url  configuration
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
@@ -103,7 +109,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 
     //use hangfire dashboard
-    app.UseHangfireDashboard();
+    //app.UseHangfireDashboard();
 }
 
 app.UseMiddleware<ExceptionMiddleware>();   //Add middleware
