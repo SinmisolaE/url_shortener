@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("URLShort.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7bb9b101595a62291f3949d7b2db2af04bd2ef54")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bd3201afcca3f431361021725a4cf8c7d303d9d5")]
 [assembly: System.Reflection.AssemblyProductAttribute("URLShort.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("URLShort.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

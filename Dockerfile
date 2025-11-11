@@ -27,5 +27,12 @@ RUN dotnet publish "URLShort.API.csproj" -c Release -o /app/publish /p:UseAppHos
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
+
+#Security improvement by adding user
+RUN adduser --disabled-password --home /app --gecos '' appuser && chown -R appuser:appuser /app
+
+USER appuser
+
 ENTRYPOINT ["dotnet", "URLShort.API.dll"]
 

@@ -47,7 +47,8 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 
 builder.Services.AddDbContext<ShortenUrlDbContext>(options =>
-    options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 44)),  //ServerVersion.AutoDetect was causing startup fail of docker
+    options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 44)),
+    //ServerVersion.AutoDetect was causing startup fail of docker
     // as it tried to connect to mysql at project startup
     b => b.MigrationsAssembly("URLShort.Infrastructure")) // Tell ef wehere migrations are
 );
@@ -102,6 +103,30 @@ builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>()
 
 var app = builder.Build();
 
+
+try
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbContext = scope.ServiceProvider.GetRequiredService<ShortenUrlDbContext>();
+
+        if (await dbContext.Database.CanConnectAsync())
+        {
+            await dbContext.Database.MigrateAsync();
+            System.Console.WriteLine("Database migrated successfully");
+        } else
+        {
+            System.Console.WriteLine("Cannot connect to db, Migrations will be skipped");
+        }
+    }
+} catch (Exception ex)
+{
+    System.Console.WriteLine($"Error during migration: {ex.Message}");
+}
+
+
+
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -124,4 +149,6 @@ app.MapControllers();
 
 app.MapHealthChecks("/health");
 
-app.Run();
+
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+app.Run($"http://0.0.0.0:{port}");
