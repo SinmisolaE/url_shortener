@@ -34,5 +34,8 @@ RUN adduser --disabled-password --home /app --gecos '' appuser && chown -R appus
 
 USER appuser
 
+HEALTHCHECK --interval=30s --timeout=4s --start-period=30s --retries=3 \
+    CMD curl -f http://localhost:8080/health || exit 1
+
 ENTRYPOINT ["dotnet", "URLShort.API.dll"]
 

@@ -1,0 +1,27 @@
+2025-11-11 05:12:36.964 +00:00 [INF] Executed DbCommand (443ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT GET_LOCK('__urlshortenerdb_EFMigrationsLock', 259200)
+2025-11-11 05:12:48.872 +00:00 [INF] Executed DbCommand (11,649ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS `__EFMigrationsHistory` (
+    `MigrationId` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
+    `ProductVersion` varchar(32) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK___EFMigrationsHistory` PRIMARY KEY (`MigrationId`)
+) CHARACTER SET=utf8mb4;
+2025-11-11 05:12:51.692 +00:00 [INF] Executed DbCommand (2,686ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='urlshortenerdb' AND TABLE_NAME='__EFMigrationsHistory';
+2025-11-11 05:12:52.008 +00:00 [INF] Executed DbCommand (308ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;
+2025-11-11 05:12:52.062 +00:00 [INF] No migrations were applied. The database is already up to date.
+2025-11-11 05:12:52.071 +00:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT RELEASE_LOCK('__urlshortenerdb_EFMigrationsLock')
+2025-11-11 05:12:53.430 +00:00 [INF] Now listening on: http://0.0.0.0:8080
+2025-11-11 05:12:53.441 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-11 05:12:53.443 +00:00 [INF] Hosting environment: Development
+2025-11-11 05:12:53.444 +00:00 [INF] Content root path: /home/sola_g/Downloads/SWE/URLShort/URLShort.API
+2025-11-11 05:14:27.738 +00:00 [INF] Request starting HTTP/1.1 GET http://0.0.0.0:8080/health - null null
+2025-11-11 05:14:27.914 +00:00 [WRN] Failed to determine the https port for redirect.
+2025-11-11 05:14:27.946 +00:00 [INF] Executing endpoint 'Health checks'
+2025-11-11 05:14:28.306 +00:00 [INF] Executed endpoint 'Health checks'
+2025-11-11 05:14:28.313 +00:00 [INF] Request finished HTTP/1.1 GET http://0.0.0.0:8080/health - 200 null text/plain 583.0697ms
+2025-11-11 05:14:35.414 +00:00 [INF] Application is shutting down...

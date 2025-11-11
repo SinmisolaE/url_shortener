@@ -1,0 +1,16 @@
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
+
+
+[deploy]
+numReplicas = 1
+restartPolicyType = "ON_FAILURE"
+
+
+[healthcheck]
+path = "/health"
+port = 8080
+initialDelay = 30
+timeout = 10
+period = 30
